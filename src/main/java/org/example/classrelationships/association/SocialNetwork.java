@@ -1,4 +1,4 @@
-package org.example.classrelationships;
+package org.example.classrelationships.association;
 
 import java.util.ArrayList;
 import java.util.List;
