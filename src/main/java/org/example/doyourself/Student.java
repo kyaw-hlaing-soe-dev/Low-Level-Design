@@ -4,26 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Student {
+public class Student extends Person {
 
-    private final int id;
-    private final String name;
-    private String email;
     private final List<Course> courses = new ArrayList<>();
     private StudentStatus status;
 
-    public Student(int id, String name, String email) {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Student ID must be positive");
-        }
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Student name must not be blank");
-        }
-        validateEmail(email);
 
-        this.id = id;
-        this.name = name.trim();
-        this.email = email;
+    public Student(int id, String name, String email) {
+        super(id, name, email);
         this.status = StudentStatus.ACTIVE;
     }
 
@@ -36,15 +24,10 @@ public class Student {
     }
 
     public void displayCourses() {
-        System.out.println("Courses for student " + name + ":");
+        System.out.println("Courses for student " + getName() + ":");
         for (Course course : courses) {
             System.out.println(course.getTitle() + " (" + course.getCourseCode() + ")");
         }
-    }
-
-    public void changeEmail(String newEmail) {
-        validateEmail(newEmail);
-        this.email = newEmail;
     }
 
     public void graduate() {
@@ -54,28 +37,6 @@ public class Student {
         status = StudentStatus.GRADUATED;
     }
 
-    private void validateEmail(String email) {
-        if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("Student email must not be blank");
-        }
-
-        int atIndex = email.indexOf('@');
-        if (atIndex <= 0 || atIndex == email.length() - 1) {
-            throw new IllegalArgumentException("Student email must contain a valid @ separator");
-        }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     public StudentStatus getStatus() {
         return status;
@@ -93,11 +54,11 @@ public class Student {
         if (!(object instanceof Student student)) {
             return false;
         }
-        return id == student.id;
+        return getId() == student.getId();
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(id);
+        return Integer.hashCode(getId());
     }
 }
