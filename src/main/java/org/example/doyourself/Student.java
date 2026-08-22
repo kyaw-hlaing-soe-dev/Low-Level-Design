@@ -2,6 +2,7 @@ package org.example.doyourself;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Student {
 
@@ -26,11 +27,12 @@ public class Student {
         this.status = StudentStatus.ACTIVE;
     }
 
-    public void addCourse(Course course) {
-        if (course == null || this.courses.contains(course) ) {
-            return;
+    public void enroll(Course course) {
+        Objects.requireNonNull(course, "Course must not be null");
+        if (!courses.contains(course)) {
+            courses.add(course);
+            course.addStudent(this);
         }
-        courses.add(course);
     }
 
     public void displayCourses() {
@@ -80,6 +82,22 @@ public class Student {
     }
 
     public List<Course> getCourses() {
-        return courses;
+        return List.copyOf(courses);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Student student)) {
+            return false;
+        }
+        return id == student.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
     }
 }
