@@ -9,6 +9,7 @@ public class Student {
     private String name;
     private String email;
     private List<Course> courses = new ArrayList<>();
+    private StudentStatus status;
 
     public Student(int id, String name, String email) {
         this.id = id;
