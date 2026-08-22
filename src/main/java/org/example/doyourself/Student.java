@@ -45,4 +45,9 @@ public class Student extends Person {
     public List<Course> getCourses() {
         return List.copyOf(courses);
     }
+
+    @Override
+    public String getRole() {
+        return "STUDENT";
+    }
 }

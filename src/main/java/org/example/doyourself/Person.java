@@ -49,6 +49,8 @@ public abstract class Person {
         return email;
     }
 
+    public abstract String getRole();
+
     @Override
     public final boolean equals(Object object) {
         if (this == object) {
