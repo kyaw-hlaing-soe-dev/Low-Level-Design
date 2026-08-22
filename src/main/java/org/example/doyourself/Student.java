@@ -45,20 +45,4 @@ public class Student extends Person {
     public List<Course> getCourses() {
         return List.copyOf(courses);
     }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof Student student)) {
-            return false;
-        }
-        return getId() == student.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(getId());
-    }
 }
